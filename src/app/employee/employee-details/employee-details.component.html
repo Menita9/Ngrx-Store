@@ -1,0 +1,70 @@
+<!--Made Use of Bootstrap4 for the Employee Form with Template Driven validation-->
+  <div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h3>Add Employees to the NGRX store</h3>
+                <form name="form" (ngSubmit)="f.form.valid && addNewEmployee(f)" #f="ngForm"  novalidate>
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="text" class="form-control" name="id" ngModel #id="ngModel" [ngClass]="{ 'is-invalid': id.invalid && id.touched}" required />
+                        <div *ngIf="id.touched&& id.invalid" class="invalid-feedback">
+                            <div *ngIf="id.errors.required">ID is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" class="form-control" name="name" ngModel #name="ngModel" [ngClass]="{ 'is-invalid': name.touched && name.invalid }" required />
+                        <div *ngIf="name.touched&& name.invalid" class="invalid-feedback">
+                            <div *ngIf="name.errors.required"> Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">ADDRESS</label>
+                        <input type="text" class="form-control" name="address" ngModel #address="ngModel" [ngClass]="{ 'is-invalid': address.touched && address.invalid }" required  />
+                        <div *ngIf="address.touched && address.invalid" class="invalid-feedback">
+                            <div *ngIf="address.errors.required">Address is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="department">DEPARTMENT</label>
+                      <input type="text" class="form-control" name="department" ngModel #department="ngModel" [ngClass]="{ 'is-invalid': department.touched && department.invalid }" required  />
+                      <div *ngIf="department.touched&& department.invalid" class="invalid-feedback">
+                          <div *ngIf="department.errors.required">Department is required</div>
+                      </div>
+                  </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Displaying Employee Details in the STORE-->
+<div class="container">
+  <h2>Employees Details</h2>
+  <p *ngIf='employeeDetails.length===0'>No Employees Added</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>ADDRESS</th>
+        <th>DEPARTMENT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employeeDetails;">
+        <td>{{employee.ID}}</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.address}}</td>
+        <td>{{employee.department}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
